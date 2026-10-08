@@ -2,114 +2,108 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<title>SpendLens — Báo cáo Mini Project 3</title>
+<title>SpendLens — Short Technical Report</title>
 <style>
 @page { size: A4; margin: 14mm; }
 * { box-sizing: border-box; }
-body { margin: 0; font: 10.5pt/1.38 Arial, sans-serif; color: #193229; }
+body { margin: 0; font: 10.5pt/1.4 Arial, sans-serif; color: #18342a; }
 .page { position: relative; height: 268mm; break-after: page; }
 .page:last-child { break-after: auto; }
-h1 { color: #087858; font-size: 22pt; margin: 0 0 5mm; }
-h2 { color: #087858; font-size: 13pt; margin: 5mm 0 2mm; }
+h1 { margin: 0 0 3mm; color: #087858; font-size: 22pt; }
+h2 { margin: 6mm 0 2mm; color: #087858; font-size: 12.5pt; }
 p { margin: 2mm 0; }
 ul { margin: 2mm 0; padding-left: 6mm; }
-li { margin: 1mm 0; }
-.subtitle, .small { color: #61756c; }
-.small { font-size: 9pt; }
-.badge { display: inline-block; background: #e2f5ed; color: #087858; padding: 2mm 4mm; border-radius: 3mm; font-weight: bold; }
+li { margin: 1.5mm 0; }
 table { width: 100%; border-collapse: collapse; margin: 3mm 0; }
-th, td { border: 1px solid #d3e3da; padding: 2mm; text-align: left; vertical-align: top; }
-th { background: #e8f4ee; }
-.flow { background: #e8f4ee; border-left: 4px solid #0f9d76; padding: 4mm; font-weight: bold; }
-.shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 4mm 0; }
-.shot { text-align: center; font-size: 9pt; font-weight: bold; }
-.shot img { display: block; width: 100%; height: 93mm; object-fit: contain; border: 1px solid #d3e3da; border-radius: 2mm; margin-bottom: 2mm; }
-.footer { position: absolute; bottom: 0; width: 100%; border-top: 1px solid #d3e3da; padding-top: 2mm; font-size: 9pt; color: #61756c; }
+th, td { padding: 2.4mm; border: 1px solid #d2e3d9; text-align: left; vertical-align: top; }
+th { background: #e9f5ee; }
+.muted { color: #60766a; }
+.small { font-size: 9pt; }
+.badge { display: inline-block; padding: 2mm 4mm; border-radius: 3mm; background: #e2f5eb; color: #087858; font-weight: bold; }
+.flow { margin: 3mm 0; padding: 4mm; border-left: 4px solid #0f9d76; background: #e9f5ee; font-weight: bold; }
+.screens { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 4mm 0; }
+.screen { text-align: center; font-size: 9pt; font-weight: bold; }
+.screen img { display: block; width: 100%; height: 95mm; margin-bottom: 2mm; object-fit: contain; border: 1px solid #d2e3d9; border-radius: 2mm; }
+.footer { position: absolute; bottom: 0; width: 100%; padding-top: 2mm; border-top: 1px solid #d2e3d9; color: #60766a; font-size: 9pt; }
+a { color: #087858; }
 </style>
 </head>
 <body>
 <section class="page">
 <h1>SpendLens</h1>
-<p class="subtitle">Mini Project 3 · OCR Expense Tracker &amp; Receipt Parser</p>
-<p><span class="badge">Báo cáo kỹ thuật · 08/10/2026</span></p>
-<h2>1. Vấn đề và mục tiêu</h2>
-<p>Nhập chi tiêu từ hóa đơn giấy mất thời gian và dễ sai. SpendLens cho phép chụp hoặc chọn ảnh hóa đơn, nhận diện chữ ngay trên thiết bị, gợi ý cửa hàng, tổng tiền và ngày; người dùng kiểm tra trước khi lưu vào SQLite.</p>
-<h2>2. Công nghệ</h2>
-<p>Flutter 3.22.1, Dart 3.4.1, Google ML Kit Text Recognition, camera, image_cropper, sqflite, Riverpod và CustomPainter. Giao diện Material 3 tiếng Việt, dùng VND nguyên.</p>
-<h2>3. Tình trạng chức năng</h2>
+<p class="muted">Mini Project 3 · OCR Expense Tracker &amp; Receipt Parser</p>
+<p><span class="badge">Short Technical Report · 08/10/2026</span></p>
+
+<h2>1. Tổng quan</h2>
+<p>SpendLens là ứng dụng Flutter quản lý chi tiêu cá nhân. Người dùng chụp hoặc chọn ảnh hóa đơn, OCR gợi ý tên cửa hàng, số tiền và ngày; người dùng kiểm tra, sửa rồi lưu giao dịch. Ứng dụng cũng hỗ trợ nhập tay, xem lịch sử và thống kê chi tiêu.</p>
+
+<h2>2. Công nghệ chính</h2>
+<p>Flutter 3.22.1, Dart 3.4.1, Google ML Kit Text Recognition, camera, image_cropper, sqflite/SQLite, Riverpod và CustomPainter. Giao diện tiếng Việt, dùng số nguyên VND.</p>
+
+<h2>3. Chức năng và trạng thái</h2>
 <table>
-<tr><th>Chức năng</th><th>Kết quả xác minh</th></tr>
-<tr><td>Camera, thư viện ảnh, crop/xoay</td><td>Đã chạy trên Android emulator API 35; chụp ảnh, nhập qua Photo Picker và crop thành công.</td></tr>
-<tr><td>OCR và parser</td><td>ML Kit đọc được ảnh hóa đơn tổng hợp khi tắt Wi-Fi/dữ liệu di động; parser trích xuất cửa hàng, 50.000 ₫ và ngày 08/10/2026. Có cảnh báo và form sửa.</td></tr>
-<tr><td>SQLite CRUD</td><td>Đã thêm thủ công và qua OCR, sửa, xóa, mở lại ứng dụng vẫn còn dữ liệu.</td></tr>
-<tr><td>Dashboard và thống kê</td><td>Donut/bar chart CustomPainter hiển thị dữ liệu SQLite và cập nhật sau khi sửa/xóa.</td></tr>
-<tr><td>Tìm kiếm/lọc/sắp xếp</td><td>Đã triển khai trong màn hình lịch sử; chưa kiểm thử đủ mọi tổ hợp bộ lọc.</td></tr>
+<tr><th>Chức năng</th><th>Trạng thái</th></tr>
+<tr><td>Camera, chọn ảnh, cắt/xoay</td><td>Đã chạy trên Android emulator API 35.</td></tr>
+<tr><td>OCR ngoại tuyến và phân tích hóa đơn</td><td>Đã đọc ảnh hóa đơn tổng hợp khi tắt mạng; có form xác nhận và nhập tay khi OCR không đọc được.</td></tr>
+<tr><td>Quản lý chi tiêu bằng SQLite</td><td>Đã thêm, xem, sửa, xóa và kiểm tra dữ liệu còn sau khi mở lại ứng dụng.</td></tr>
+<tr><td>Dashboard, donut và bar chart</td><td>Đã hiển thị dữ liệu SQLite bằng CustomPainter; cập nhật sau sửa/xóa.</td></tr>
+<tr><td>Tìm kiếm, lọc, sắp xếp lịch sử</td><td>Đã triển khai; chưa kiểm thử đủ mọi tổ hợp bộ lọc.</td></tr>
 </table>
-<h2>4. Quyền riêng tư</h2>
-<p>Ảnh và giao dịch nằm trong vùng lưu trữ riêng của ứng dụng. Luồng OCR không gọi server; không có Firebase, tài khoản, cloud OCR hay cloud analytics.</p>
-<div class="footer">SpendLens · Báo cáo 1/4</div>
+
+<h2>4. Tệp bàn giao</h2>
+<p>Mã nguồn: <a href="https://github.com/maichiphuoc/mini_project3">github.com/maichiphuoc/mini_project3</a><br>
+APK dùng thử: <a href="https://github.com/maichiphuoc/mini_project3/releases/tag/v1.0.0-demo">GitHub Release v1.0.0-demo</a> (debug-signed, Android API 23+).</p>
+<div class="footer">SpendLens · Báo cáo kỹ thuật 1/3</div>
 </section>
+
 <section class="page">
-<h1>Kiến trúc và xử lý</h1>
-<h2>5. Luồng chính</h2>
-<div class="flow">Camera / thư viện → Crop &amp; Preview → ML Kit OCR → ReceiptParser → Review → SQLite → Dashboard / Analytics</div>
-<p>Widget điều hướng và hiển thị; service xử lý OCR, parser và file ảnh; repository quản lý SQLite; Riverpod cấp trạng thái cho các màn hình. OCR chỉ chạy sau khi người dùng xác nhận ảnh.</p>
-<h2>6. Parser hóa đơn</h2>
-<ul>
-<li>Chuẩn hóa dòng và dấu để so từ khóa nhưng giữ văn bản OCR gốc cho đối chiếu.</li>
-<li>Nhận nhiều định dạng VND, lưu số nguyên, bỏ dòng số điện thoại, mã số thuế và ngày khi chọn tổng tiền.</li>
-<li>Chấm điểm cao cho “TỔNG THANH TOÁN”, “CẦN THANH TOÁN”, “GRAND TOTAL”; giảm điểm cho tiền thừa, tiền khách đưa, giảm giá và thuế.</li>
-<li>Kiểm tra ngày thực tế và năm nhuận; ưu tiên dòng có nhãn ngày/giờ. Tên cửa hàng lấy từ đầu hóa đơn sau khi lọc dòng không phù hợp.</li>
-<li>Gợi ý danh mục bằng từ khóa và cảnh báo khi giá trị cần kiểm tra. Người dùng sửa trước khi lưu.</li>
-</ul>
-<h2>7. Lưu trữ</h2>
-<p>Bảng <strong>expenses</strong> chứa id, merchant, amount, date, category, note, image_path, thumbnail_path và raw_ocr_text; có index theo ngày. Ảnh hóa đơn được sao chép vào thư mục riêng của ứng dụng, thumbnail dùng trong lịch sử.</p>
-<h2>8. Biểu đồ</h2>
-<p>DonutPainter tổng hợp theo danh mục trong kỳ; BarChartPainter tổng hợp theo thứ trong tuần hiện tại. Dữ liệu đến từ SQLite qua Riverpod. Biểu đồ có animation hữu hạn và tương tác chạm.</p>
-<div class="footer">SpendLens · Báo cáo 2/4</div>
+<h1>Thiết kế và xử lý</h1>
+
+<h2>5. Luồng nghiệp vụ</h2>
+<div class="flow">Camera / Thư viện → Crop &amp; Preview → ML Kit OCR → Parser → Review → SQLite → Dashboard / Analytics</div>
+<p>OCR xử lý ảnh trên thiết bị và không gọi server. Người dùng luôn xác nhận kết quả trước khi lưu. Ảnh hóa đơn và thumbnail được lưu trong vùng dữ liệu riêng của ứng dụng.</p>
+
+<h2>6. Kiến trúc mã nguồn</h2>
+<table>
+<tr><th>Thành phần</th><th>Trách nhiệm</th></tr>
+<tr><td><code>lib/ui</code></td><td>Các màn hình, biểu đồ và tương tác.</td></tr>
+<tr><td><code>lib/services</code></td><td>Nhận dạng chữ, parser hóa đơn, lưu ảnh và thumbnail.</td></tr>
+<tr><td><code>lib/data</code></td><td>SQLite schema và ExpenseRepository.</td></tr>
+<tr><td><code>lib/state</code>, <code>lib/core</code></td><td>Riverpod providers, model và định dạng VND/ngày.</td></tr>
+</table>
+
+<h2>7. Trích xuất dữ liệu hóa đơn</h2>
+<p>Parser chuẩn hóa dòng chữ nhưng giữ văn bản OCR gốc để đối chiếu. Regex nhận các định dạng VND và ngày; heuristic ưu tiên dòng “TỔNG THANH TOÁN”, “CẦN THANH TOÁN”, “GRAND TOTAL”, đồng thời giảm điểm tiền thừa, tiền khách đưa, thuế và giảm giá. Ngày được kiểm tra tính hợp lệ; tên cửa hàng ưu tiên các dòng đầu. Kết quả chưa chắc chắn được cảnh báo trên màn hình Review.</p>
+
+<h2>8. Lưu trữ và biểu đồ</h2>
+<p>Bảng <code>expenses</code> lưu cửa hàng, số tiền VND nguyên, ngày, danh mục, ghi chú, đường dẫn ảnh/thumbnail và OCR text; có index theo ngày. Donut chart tổng hợp theo danh mục, bar chart theo ngày trong tuần. Cả hai được vẽ bằng CustomPainter, có animation và dữ liệu lấy từ SQLite.</p>
+
+<div class="footer">SpendLens · Báo cáo kỹ thuật 2/3</div>
 </section>
+
 <section class="page">
-<h1>Ảnh ứng dụng và kiểm thử</h1>
-<p class="small">Ảnh chụp trực tiếp từ APK chạy trên Android emulator API 35. Màn Review dùng ảnh hóa đơn tổng hợp trong test fixture.</p>
-<div class="shots">
-  <div class="shot"><img src="screenshots/dashboard.png" alt="Dashboard">Dashboard</div>
-  <div class="shot"><img src="screenshots/scanner.png" alt="Camera scanner">Camera</div>
-  <div class="shot"><img src="screenshots/review.png" alt="OCR review">OCR Review</div>
-  <div class="shot"><img src="screenshots/analytics.png" alt="Analytics">Analytics</div>
+<h1>Minh họa và kiểm thử</h1>
+<p class="small muted">Ảnh chụp trực tiếp từ ứng dụng trên Android emulator API 35. Màn Review dùng hóa đơn tổng hợp không chứa dữ liệu cá nhân.</p>
+<div class="screens">
+  <div class="screen"><img src="screenshots/dashboard.png" alt="Dashboard">Dashboard</div>
+  <div class="screen"><img src="screenshots/scanner.png" alt="Camera">Camera</div>
+  <div class="screen"><img src="screenshots/review.png" alt="Review">OCR Review</div>
+  <div class="screen"><img src="screenshots/analytics.png" alt="Analytics">Analytics</div>
 </div>
+
 <h2>9. Kết quả kiểm thử</h2>
 <table>
 <tr><th>Kiểm tra</th><th>Kết quả</th></tr>
-<tr><td>flutter pub get / flutter analyze</td><td>Thành công / không có issue.</td></tr>
-<tr><td>flutter test</td><td>22/22 ca pass: 18 parser và 4 SQLite repository.</td></tr>
-<tr><td>flutter build apk --release</td><td>Thành công; APK 91,7 MB, debug-signed cho demo nội bộ.</td></tr>
-<tr><td>Android emulator API 35</td><td>Camera, crop, OCR offline với fixture, CRUD và lưu qua khởi động lại đã chạy.</td></tr>
+<tr><td><code>flutter analyze</code></td><td>Không có issue.</td></tr>
+<tr><td><code>flutter test</code></td><td>22/22 ca pass: 18 parser và 4 SQLite repository.</td></tr>
+<tr><td><code>flutter build apk --release</code></td><td>Thành công; APK 91,7 MB.</td></tr>
+<tr><td>Android emulator API 35</td><td>Camera, crop, OCR offline với fixture, CRUD và dữ liệu qua mở lại đã chạy.</td></tr>
 </table>
-<div class="footer">SpendLens · Báo cáo 3/4</div>
-</section>
-<section class="page">
-<h1>Đánh giá và bàn giao</h1>
-<h2>10. Kết quả đạt được</h2>
-<p>Ứng dụng Android chạy được, tích hợp luồng từ ảnh đến giao dịch SQLite và thống kê. OCR trên emulator nhận diện văn bản trong ảnh mẫu khi mạng bị tắt. Parser có 18 ca và SQLite repository có 4 ca kiểm thử tự động; giao diện hỗ trợ nhập tay nếu OCR không nhận được chữ.</p>
-<h2>11. Giới hạn kiểm chứng</h2>
-<ul>
-<li>Chưa kiểm thử trên điện thoại Android vật lý hoặc iOS; cấu hình iOS mới ở mức mã nguồn.</li>
-<li>Ảnh kiểm tra OCR là hóa đơn tổng hợp, chưa đo độ chính xác trên tập hóa đơn thật, ảnh mờ hay nhiều cột.</li>
-<li>Chưa có số đo thời gian OCR đại diện cho thiết bị vật lý; không công bố tỷ lệ chính xác hay tốc độ chưa đo.</li>
-<li>Chưa quay video demo. APK được cung cấp qua GitHub Releases, không commit vào Git source; bản demo ký bằng debug key.</li>
-</ul>
-<h2>12. Hướng hoàn thiện trước khi nộp</h2>
-<p>Thử trên điện thoại Android với nhiều hóa đơn thật đã che thông tin cá nhân; kiểm tra quyền camera từ chối, ảnh mờ và bộ lọc lịch sử; ghi thời gian OCR theo thiết bị; quay video demo 2–3 phút; ký release APK bằng keystore riêng nếu phát hành.</p>
-<h2>13. Tệp bàn giao</h2>
-<table>
-<tr><th>Tệp</th><th>Vị trí</th></tr>
-<tr><td>Mã nguồn và hướng dẫn</td><td>github.com/maichiphuoc/mini_project3, README.md</td></tr>
-<tr><td>Android APK</td><td>GitHub Releases: v1.0.0-demo</td></tr>
-<tr><td>Ảnh và kịch bản demo</td><td>docs/screenshots/, docs/DEMO.md</td></tr>
-<tr><td>Báo cáo</td><td>docs/report.pdf</td></tr>
-</table>
-<p class="small">Chưa có template báo cáo chính thức; cần đối chiếu với template của môn học nếu được cung cấp.</p>
-<div class="footer">SpendLens · Báo cáo 4/4</div>
+
+<h2>10. Giới hạn và kết luận</h2>
+<p>Ứng dụng đã hoàn thành luồng từ quét đến thống kê. Chưa kiểm thử trên điện thoại vật lý/iOS hoặc đo độ chính xác OCR trên tập hóa đơn thật; chưa có video demo. APK hiện ký bằng debug key để dùng thử, chưa phù hợp phát hành thương mại.</p>
+<p class="small muted">Không có template báo cáo chính thức trong workspace; bản này dùng bố cục báo cáo kỹ thuật ngắn 3 trang để đối chiếu khi có template của môn học.</p>
+<div class="footer">SpendLens · Báo cáo kỹ thuật 3/3</div>
 </section>
 </body>
 </html>

@@ -72,5 +72,5 @@ SQLite lưu `amount` dưới dạng số nguyên VND, ngày dưới dạng Unix 
 
 - APK demo: [tải SpendLens-v1.0.0-demo.apk](https://github.com/maichiphuoc/mini_project3/releases/download/v1.0.0-demo/SpendLens-v1.0.0-demo.apk) (91,7 MB) trên điện thoại Android rồi mở tệp để cài. APK nằm trong GitHub Releases, không nằm trong Git source. Bản này ký bằng debug key cho demo nội bộ. Có thể build lại bằng `flutter build apk --release` để tạo `build/app/outputs/flutter-apk/app-release.apk`.
 - Demo: quay theo [docs/DEMO.md](docs/DEMO.md) trên thiết bị Android vật lý nếu bài nộp yêu cầu video.
-- Báo cáo: [docs/report.pdf](docs/report.pdf), bốn trang, có ảnh chụp thực từ emulator và kết quả kiểm thử.
+- Báo cáo: [docs/report.pdf](docs/report.pdf), ba trang, có ảnh chụp thực từ emulator và kết quả kiểm thử.
 - GitHub: [maichiphuoc/mini_project3](https://github.com/maichiphuoc/mini_project3).
