@@ -12,4 +12,4 @@ Chỉ quay chức năng đã kiểm chứng trên thiết bị Android. Dùng h�
 | 02:05–02:30 | Mở thống kê, chạm donut và biểu đồ tuần. |
 | 02:30–03:00 | Khởi động lại ứng dụng, xác nhận dữ liệu còn trong SQLite; kết luận. |
 
-Trước khi quay: cấp quyền camera, chuẩn bị hóa đơn dễ đọc và dọn dữ liệu thử. Lưu video thật, chụp bốn màn hình thật vào `docs/screenshots/`, thêm URL GitHub/video vào README và báo cáo sau khi đăng tải.
+Trước khi quay: cấp quyền camera, chuẩn bị hóa đơn dễ đọc và dọn dữ liệu thử. Lưu video thật, chụp bốn màn hình thật vào `docs/screenshots/`, thêm URL video vào README và báo cáo sau khi đăng tải.
